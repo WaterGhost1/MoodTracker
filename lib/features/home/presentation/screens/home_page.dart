@@ -63,13 +63,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   state.currentMood != null
-                      ? MoodCard(
-                        title: state.currentMood!.name,
-                        description: state.currentMood!.description,
-                        date: state.moodsOfTheDay!.date,
-                        time: DateFormatter.getTime(state.currentMood!.time),
-                        moodColor: Picker.colorPicker(
-                          name: state.currentMood!.name,
+                      ? GestureDetector(
+                        onTap: () {
+                          context.goNamed('details', extra: state.currentMood);
+                        },
+                        child: MoodCard(
+                          title: state.currentMood!.name,
+                          description: state.currentMood!.description,
+                          date: state.moodsOfTheDay!.date,
+                          time: DateFormatter.getTime(state.currentMood!.time),
+                          moodColor: Picker.colorPicker(
+                            name: state.currentMood!.name,
+                          ),
                         ),
                       )
                       : SizedBox.shrink(),

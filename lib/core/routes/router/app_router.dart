@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mood_tracker/core/models/mood_model.dart';
 import 'package:mood_tracker/core/routes/cubit/route_cubit.dart';
 import 'package:mood_tracker/core/theme/app_pallete.dart';
+import 'package:mood_tracker/features/history/presentation/screens/history_screen.dart';
 import 'package:mood_tracker/features/home/presentation/screens/home_page.dart';
 import 'package:mood_tracker/features/mood_details/presentation/screens/detail_screen.dart';
 import 'package:mood_tracker/features/mood_entry/presentation/screens/mood_entry_screen.dart';
@@ -93,7 +94,7 @@ class AppRouter {
                                 context
                                     .read<BottomNavigationCubit>()
                                     .updateTabIndex(2);
-                                context.goNamed('entry');
+                                context.goNamed('history');
                               },
                               child: Container(
                                 color:
@@ -126,6 +127,11 @@ class AppRouter {
               path: '/',
               name: 'home',
               builder: (context, state) => const HomeScreen(),
+            ),
+            GoRoute(
+              path: '/history',
+              name: 'history',
+              builder: (context, state) => const HistoryScreen(),
             ),
             GoRoute(
               path: '/entry',
