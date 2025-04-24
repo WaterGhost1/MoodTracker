@@ -1,14 +1,14 @@
-import 'package:mood_tracker/core/models/journal_model.dart';
+import 'package:hive/hive.dart';
 import 'package:mood_tracker/core/models/mood_model.dart';
 
-class MoodsInADay {
-  final List<Mood> moodsList;
-  final Journal journal;
-  final DateTime date;
+part 'mood_per_day.g.dart';
 
-  MoodsInADay({
-    required this.moodsList,
-    required this.date,
-    required this.journal,
-  });
+@HiveType(typeId: 0)
+class MoodsInADay {
+  @HiveField(0)
+  final List<Mood> moodsList;
+  @HiveField(1)
+  final String date;
+
+  MoodsInADay({required this.moodsList, required this.date});
 }

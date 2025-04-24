@@ -1,6 +1,42 @@
 part of 'mood_bloc.dart';
 
 @immutable
-sealed class MoodState {}
+sealed class MoodState {
+  final Mood? currentMood;
+  final MoodsInADay? currentMoodsInADay;
 
-final class MoodInitial extends MoodState {}
+  const MoodState({
+    required this.currentMood,
+    required this.currentMoodsInADay,
+  });
+}
+
+final class MoodInitial extends MoodState {
+  const MoodInitial({
+    required super.currentMood,
+    required super.currentMoodsInADay,
+  });
+}
+
+final class MoodSuccess extends MoodState {
+  const MoodSuccess({
+    required super.currentMood,
+    required super.currentMoodsInADay,
+  });
+}
+
+final class MoodFailed extends MoodState {
+  final String message;
+  const MoodFailed({
+    required this.message,
+    required super.currentMood,
+    required super.currentMoodsInADay,
+  });
+}
+
+final class MoodLoading extends MoodState {
+  const MoodLoading({
+    required super.currentMood,
+    required super.currentMoodsInADay,
+  });
+}
