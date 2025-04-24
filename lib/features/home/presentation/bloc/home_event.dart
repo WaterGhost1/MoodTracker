@@ -5,6 +5,5 @@ sealed class HomeEvent {}
 
 final class FetchMoods extends HomeEvent {
   final DateTime date;
-  final Mood currentMood;
-  FetchMoods({required this.currentMood, required this.date});
+  FetchMoods({required this.date});
 }

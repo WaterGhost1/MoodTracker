@@ -5,6 +5,8 @@ import 'package:mood_tracker/core/models/mood_model.dart';
 import 'package:mood_tracker/core/models/mood_per_day.dart';
 import 'package:mood_tracker/core/datasource/mood_local_datasource.dart';
 import 'package:mood_tracker/core/repository/shared_repository.dart';
+import 'package:mood_tracker/core/routes/cubit/route_cubit.dart';
+import 'package:mood_tracker/features/home/presentation/bloc/home_bloc.dart';
 import 'package:mood_tracker/features/mood_entry/presentation/bloc/mood_bloc.dart';
 import 'package:mood_tracker/features/mood_entry/repositories/mood_entry_repository.dart';
 
@@ -47,11 +49,19 @@ void _initMoodEntry() {
     () => MoodEntryRepository(moodLocalDatasource: sl<MoodLocalDatasource>()),
   );
 
+  // Nav Cubit
+  sl.registerFactory<BottomNavigationCubit>(() => BottomNavigationCubit());
+
   // MoodBloc
   sl.registerFactory<MoodBloc>(
     () => MoodBloc(
       moodEntryRepository: sl<MoodEntryRepository>(),
       sharedRepository: sl<SharedRepository>(),
     ),
+  );
+
+  // HomeBloc
+  sl.registerFactory<HomeBloc>(
+    () => HomeBloc(sharedRepository: sl<SharedRepository>()),
   );
 }

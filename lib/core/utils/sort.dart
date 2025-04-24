@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:mood_tracker/core/models/mood_model.dart';
 import 'package:mood_tracker/core/models/mood_per_day.dart';
 
 class Sort {
@@ -21,5 +22,17 @@ class Sort {
     }
 
     return groupedMoods;
+  }
+
+  static List<Mood> sortAndReturnNewListWithoutLatest(List<Mood> moodList) {
+    List<Mood> newList = List.from(moodList);
+
+    newList.sort((a, b) => b.time.compareTo(a.time));
+
+    if (newList.isNotEmpty) {
+      newList.removeAt(0);
+    }
+
+    return newList;
   }
 }
