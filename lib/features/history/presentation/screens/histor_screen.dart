@@ -43,7 +43,7 @@ class HistoryScreen extends StatelessWidget {
                       children:
                           moods.map((mood) {
                             return ListTile(
-                              title: Text(mood.),
+                              // title: Text(mood.),
                               subtitle: Text(mood.date.toString()),
                             );
                           }).toList(),

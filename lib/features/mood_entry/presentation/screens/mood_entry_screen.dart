@@ -15,12 +15,12 @@ class _AddNewEntryState extends State<AddNewEntry> {
   final TextEditingController controller = TextEditingController();
 
   final Map<String, String> imagePath = {
-    'ANGER': 'assets/imagesnoBg/anger.png',
-    'JOY': 'assets/imagesnoBg/joy.png',
-    'DISGUST': 'assets/imagesnoBg/disgust.png',
-    'FEAR': 'assets/imagesnoBg/fear.png',
-    'SAD': 'assets/imagesnoBg/sad.png',
-    'EMBARASSMENT': 'assets/imagesnoBg/embarassment.png',
+    'ANGER': 'assets/images2/anger.png',
+    'JOY': 'assets/images2/joy.png',
+    'DISGUST': 'assets/images2/disgust.png',
+    'FEAR': 'assets/images2/fear.png',
+    'SAD': 'assets/images2/sad.png',
+    'EMBARASSMENT': 'assets/images2/embarassment.png',
   };
 
   @override
@@ -36,7 +36,7 @@ class _AddNewEntryState extends State<AddNewEntry> {
         listener: (context, state) {},
         builder: (context, state) {
           return Column(
-            mainAxisSize: MainAxisSize.max,
+            // mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 25),
@@ -47,42 +47,43 @@ class _AddNewEntryState extends State<AddNewEntry> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 70),
+                padding: const EdgeInsets.only(top: 70), //70),
                 child: CarouselSlider(
                   items:
                       imagePath.entries.map((entry) {
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Container(
-                              height: 200,
+                            SizedBox(
+                              // color: Colors.amber,
+                              height: 230,
                               width: double.infinity,
                               child: Image.asset(
                                 entry.value,
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(height: 10),
-                            Text(
-                              entry.key,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            // SizedBox(height: 10),
+                            // Text(
+                            //   entry.key,
+                            //   style: TextStyle(
+                            //     fontSize: 18,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
                           ],
                         );
                       }).toList(),
                   options: CarouselOptions(
                     onPageChanged: (index, reason) {
-                      print(imagePath.keys.elementAt(index));
+                      // print(imagePath.keys.elementAt(index));
                       context.read<MoodBloc>().add(
                         PageChanged(
                           moodName: imagePath.keys.elementAt(index).toString(),
                         ),
                       );
 
-                      print(state);
+                      // print(state);
                     },
                     enlargeCenterPage: false,
                     viewportFraction: 1,

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mood_tracker/core/models/mood_model.dart';
-import 'package:mood_tracker/core/theme/app_pallete.dart';
+// import 'package:mood_tracker/core/theme/app_pallete.dart';
 import 'package:mood_tracker/core/utils/date_formats.dart';
 import 'package:mood_tracker/core/utils/picker.dart';
 import 'package:mood_tracker/core/widgets/mood_card.dart';

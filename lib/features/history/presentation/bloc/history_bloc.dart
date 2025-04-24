@@ -18,7 +18,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         (l) => emit(HistoryFailed(listOfMoods: state.listOfMoods)),
         (r) {
           final sortedListOfMoods = Sort.sortMoodsByDateDescending(r);
-          emit(HistorySuccess(listOfMoods: sortedListOfMoods));
+          // emit(HistorySuccess(listOfMoods: sortedListOfMoods));
         },
       );
     });

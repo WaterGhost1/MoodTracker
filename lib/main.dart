@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mood_tracker/core/routes/router/app_router.dart';
 import 'package:mood_tracker/core/routes/cubit/route_cubit.dart';
 import 'package:mood_tracker/dependency_injection.dart';
@@ -18,7 +19,14 @@ void main() async {
         BlocProvider(create: (_) => sl<MoodBloc>()),
         BlocProvider(create: (_) => sl<HomeBloc>()),
       ],
-      child: MaterialApp.router(routerConfig: appRouter.router),
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: appRouter.router,
+        theme: ThemeData(
+          textTheme: GoogleFonts.montagaTextTheme(),
+          colorScheme: ColorScheme.light(),
+        ),
+      ),
     ),
   );
 }

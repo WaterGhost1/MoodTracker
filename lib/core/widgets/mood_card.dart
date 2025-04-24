@@ -61,7 +61,7 @@ class MoodCard extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           // color: Colors.purple,
                           height: 25,
                           child: Row(
@@ -88,7 +88,7 @@ class MoodCard extends StatelessWidget {
                           ),
                         ),
 
-                        Container(
+                        SizedBox(
                           height: 40,
                           width: 400,
                           // color: Colors.blue,

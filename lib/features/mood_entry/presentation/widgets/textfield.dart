@@ -17,7 +17,7 @@ class TitleTF extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
           ),
         ),
-        Container(
+        SizedBox(
           width: 360,
           child: TextField(
             controller: titlecontroller,
