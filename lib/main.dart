@@ -23,7 +23,11 @@ void main() async {
         debugShowCheckedModeBanner: false,
         routerConfig: appRouter.router,
         theme: ThemeData(
+<<<<<<< Updated upstream
           textTheme: GoogleFonts.montagaTextTheme(),
+=======
+          textTheme: GoogleFonts.montserratTextTheme(),
+>>>>>>> Stashed changes
           colorScheme: ColorScheme.light(),
         ),
       ),
