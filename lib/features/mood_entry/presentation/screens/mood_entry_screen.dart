@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mood_tracker/features/mood_entry/presentation/bloc/mood_bloc.dart';
 import 'package:mood_tracker/features/mood_entry/presentation/widgets/textfield.dart';
 
@@ -108,9 +109,9 @@ class _AddNewEntryState extends State<AddNewEntry> {
                           description: controller.text,
                         ),
                       );
-                    } else {
-                      print(state);
                     }
+
+                    context.goNamed('home');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
