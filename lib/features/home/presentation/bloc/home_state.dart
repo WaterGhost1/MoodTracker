@@ -46,3 +46,14 @@ final class HomeLoading extends HomeState {
     required super.pieData,
   });
 }
+
+final class HomeIndividualMood extends HomeState {
+  final Mood mood;
+
+  const HomeIndividualMood({
+    required super.pieData,
+    required super.currentMood,
+    required super.moodsOfTheDay,
+    required this.mood,
+  });
+}

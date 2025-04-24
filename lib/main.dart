@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mood_tracker/core/routes/app_router.dart';
+import 'package:mood_tracker/core/routes/router/app_router.dart';
 import 'package:mood_tracker/core/routes/cubit/route_cubit.dart';
 import 'package:mood_tracker/dependency_injection.dart';
 import 'package:mood_tracker/features/home/presentation/bloc/home_bloc.dart';

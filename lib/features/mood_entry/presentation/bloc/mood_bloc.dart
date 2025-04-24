@@ -76,6 +76,16 @@ class MoodBloc extends Bloc<MoodEvent, MoodState> {
       );
     });
 
+    on<PageChanged>((event, emit) {
+      emit(
+        PageChangedState(
+          currentMood: state.currentMood,
+          currentMoodsInADay: state.currentMoodsInADay,
+          moodName: event.moodName,
+        ),
+      );
+    });
+
     // on<FetchedAllMood>((evemt, emit) async {
     //   final response = await moodEntryRepository.getAllMoodsInADay();
 

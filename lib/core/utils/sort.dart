@@ -3,6 +3,17 @@ import 'package:mood_tracker/core/models/mood_model.dart';
 import 'package:mood_tracker/core/models/mood_per_day.dart';
 
 class Sort {
+  static List<MoodsInADay> sortMoodsByDateDescending(
+    List<MoodsInADay> moodsList,
+  ) {
+    moodsList.sort((a, b) {
+      final dateA = DateTime.parse(a.date);
+      final dateB = DateTime.parse(b.date);
+      return dateB.compareTo(dateA);
+    });
+    return moodsList;
+  }
+
   static Map<String, List<MoodsInADay>> groupByMonthYear(
     List<MoodsInADay> moodsList,
   ) {

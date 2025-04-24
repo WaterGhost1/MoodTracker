@@ -53,5 +53,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         },
       );
     });
+
+    on<FetchMoodById>((event, emit) {
+      emit(
+        HomeIndividualMood(
+          pieData: state.pieData,
+          currentMood: state.currentMood,
+          moodsOfTheDay: state.moodsOfTheDay,
+          mood: event.mood,
+        ),
+      );
+    });
   }
 }

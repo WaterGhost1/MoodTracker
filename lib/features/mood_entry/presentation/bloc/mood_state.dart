@@ -40,3 +40,13 @@ final class MoodLoading extends MoodState {
     required super.currentMoodsInADay,
   });
 }
+
+final class PageChangedState extends MoodState {
+  final String moodName;
+
+  const PageChangedState({
+    required super.currentMood,
+    required super.currentMoodsInADay,
+    required this.moodName,
+  });
+}

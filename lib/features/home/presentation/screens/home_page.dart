@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mood_tracker/core/models/mood_model.dart';
 import 'package:mood_tracker/core/theme/app_pallete.dart';
 import 'package:mood_tracker/core/utils/date_formats.dart';
@@ -28,22 +30,38 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {},
       builder: (context, state) {
         if (state.moodsOfTheDay == null) {
-          return Center(child: Text("No Data Found"));
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Lottie.asset('assets/lottie/nodata.json'),
+                ),
+                Text("No Data Found..."),
+              ],
+            ),
+          );
         } else {
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child:
                         state.pieData.isNotEmpty
                             ? PChart(pieData: state.pieData)
                             : Text("No moods for today"),
                   ),
-                  Text("Current"),
+                  Text(
+                    "WHAT ARE YOU FEELING?",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   state.currentMood != null
                       ? MoodCard(
                         title: state.currentMood!.name,
@@ -55,20 +73,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       )
                       : SizedBox.shrink(),
-                  Text("History"),
+
+                  SizedBox(height: 20),
+                  Text(
+                    "YOUR MOMENTS",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(
                     height: 500,
                     child: ListView.builder(
                       itemCount: state.moodsOfTheDay?.moodsList.length ?? 0,
                       itemBuilder: (context, index) {
                         Mood? mood = state.moodsOfTheDay?.moodsList[index];
-                        return MoodCard(
-                          title: mood!.name,
-                          description: mood.description,
-                          date: state.moodsOfTheDay!.date,
-                          time: DateFormatter.getTime(mood.time),
-                          moodColor: Picker.colorPicker(
-                            name: mood.name.toUpperCase(),
+                        return GestureDetector(
+                          onTap: () {
+                            context.goNamed('details', extra: mood);
+                          },
+                          child: MoodCard(
+                            title: mood!.name,
+                            description: mood.description,
+                            date: state.moodsOfTheDay!.date,
+                            time: DateFormatter.getTime(mood.time),
+                            moodColor: Picker.colorPicker(
+                              name: mood.name.toUpperCase(),
+                            ),
                           ),
                         );
                       },

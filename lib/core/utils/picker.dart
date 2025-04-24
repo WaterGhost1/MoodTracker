@@ -21,4 +21,16 @@ class Picker {
         return AppPallete.joy;
     }
   }
+
+  static String? imgPicker({required String name}) {
+    final Map<String, String> imagePath = {
+      'ANGER': 'assets/imagesnoBg/anger.png',
+      'JOY': 'assets/imagesnoBg/joy.png',
+      'DISGUST': 'assets/imagesnoBg/disgust.png',
+      'FEAR': 'assets/imagesnoBg/fear.png',
+      'SAD': 'assets/imagesnoBg/sad.png',
+      'EMBARASSMENT': 'assets/imagesnoBg/embarassment.png',
+    };
+    return imagePath[name];
+  }
 }

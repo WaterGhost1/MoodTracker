@@ -24,3 +24,9 @@ final class MoodChanged extends MoodEvent {
 }
 
 final class FetchedAllMood extends MoodEvent {}
+
+final class PageChanged extends MoodEvent {
+  final String moodName;
+
+  PageChanged({required this.moodName});
+}
