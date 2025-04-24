@@ -20,6 +20,12 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text('go to add new screen'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                context.go(Routes.addNewEntryScreen);
+              },
+              child: Text('go to add new screen 2'),
+            ),
             MoodCard(
               moodColor: Colors.red,
               title: 'SELF EVICTION',

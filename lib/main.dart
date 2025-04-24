@@ -17,7 +17,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Mood Tracker App',
         routerConfig: router,
-        theme: ThemeData(textTheme: GoogleFonts.montserratTextTheme()),
+        theme: ThemeData(
+          textTheme: GoogleFonts.montserratTextTheme(),
+          colorScheme: ColorScheme.light(),
+        ),
 
         // theme: ThemeData(
         //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

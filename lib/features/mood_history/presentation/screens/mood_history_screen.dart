@@ -10,15 +10,7 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('history'),
-        leading: IconButton(
-          onPressed: () {
-            context.go(Routes.homeScreen);
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
-      ),
+      appBar: AppBar(centerTitle: true, title: Text('TIMELINE')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
 
@@ -26,7 +18,11 @@ class HistoryScreen extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween ,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Your Week:', style: TextStyle(fontSize: 25)),
+            Text(
+              'THIS WEEK:',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            // List View Builder
             MoodCard(
               moodColor: Colors.red,
               title: 'SAD ANG PERSON',
@@ -34,6 +30,13 @@ class HistoryScreen extends StatelessWidget {
                   'accidentally nalipat ko yung playlist, tumogtug yung song ng ex ko T- T .... totoy bibo',
               date: 'April 21, 2025',
               time: '5:00pm',
+            ),
+
+            IconButton(
+              onPressed: () {
+                context.go(Routes.homeScreen);
+              },
+              icon: Icon(Icons.arrow_back),
             ),
           ],
         ),

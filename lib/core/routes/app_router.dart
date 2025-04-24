@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:mood_tracker/features/mood_entry/presentation/screens/mood_entry_screen.dart';
+import 'package:mood_tracker/features/mood_entry/presentation/screens/mood_entry_screen2.dart';
 import 'package:mood_tracker/features/mood_history/presentation/screens/mood_history_screen.dart';
 import 'package:mood_tracker/features/mood_home/presentation/screens/mood_home_screen.dart';
 
@@ -15,11 +16,17 @@ final GoRouter router = GoRouter(
       path: Routes.historyScreen,
       builder: (context, state) => HistoryScreen(),
     ),
+
+    GoRoute(
+      path: Routes.addNewEntryScreen,
+      builder: (context, state) => AddNewEntry(),
+    ),
   ],
 );
 
 class Routes {
-  static const String entryScreen = '/';
-  static const String homeScreen = '/homeScreen';
+  static const String entryScreen = '/entryScreen';
+  static const String homeScreen = '/';
   static const String historyScreen = '/historyScreen';
+  static const String addNewEntryScreen = '/addNewEntryScreen';
 }
