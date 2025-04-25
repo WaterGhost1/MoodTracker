@@ -39,10 +39,7 @@ class MoodCard extends StatelessWidget {
           ),
           child: Card(
             elevation: 0,
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.circular(18),
-            //   side: BorderSide(color: moodColor, style: BorderStyle.solid),
-            // ),
+
             color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(8.0),

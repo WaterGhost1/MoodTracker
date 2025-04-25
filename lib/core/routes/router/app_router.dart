@@ -136,8 +136,11 @@ class AppRouter {
               path: '/details',
               name: 'details',
               builder: (context, state) {
-                final mood = state.extra as Mood;
-                return DetailScreen(mood: mood);
+                final extras = state.extra as Map<String, dynamic>;
+                final mood = extras['mood'] as Mood;
+                final String date = extras['date'] as String;
+                final String time = extras['time'] as String;
+                return DetailScreen(mood: mood, date: date, time: time);
               },
             ),
           ],

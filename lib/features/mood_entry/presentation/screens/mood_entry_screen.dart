@@ -42,7 +42,7 @@ class _AddNewEntryState extends State<AddNewEntry> {
                 padding: const EdgeInsets.only(top: 25),
                 child: Text(
                   'WHAT ARE YOU FEELING?',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
                 ),
               ),
 
@@ -54,12 +54,7 @@ class _AddNewEntryState extends State<AddNewEntry> {
                         return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-<<<<<<< Updated upstream
-                            SizedBox(
-                              // color: Colors.amber,
-=======
                             Container(
->>>>>>> Stashed changes
                               height: 230,
                               width: double.infinity,
                               child: Image.asset(
@@ -67,23 +62,11 @@ class _AddNewEntryState extends State<AddNewEntry> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-<<<<<<< Updated upstream
-                            // SizedBox(height: 10),
-                            // Text(
-                            //   entry.key,
-                            //   style: TextStyle(
-                            //     fontSize: 18,
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
-=======
->>>>>>> Stashed changes
                           ],
                         );
                       }).toList(),
                   options: CarouselOptions(
                     onPageChanged: (index, reason) {
-                      // print(imagePath.keys.elementAt(index));
                       context.read<MoodBloc>().add(
                         PageChanged(
                           moodName: imagePath.keys.elementAt(index).toString(),

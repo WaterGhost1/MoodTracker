@@ -24,12 +24,12 @@ class Picker {
 
   static String? imgPicker({required String name}) {
     final Map<String, String> imagePath = {
-      'ANGER': 'assets/imagesnoBg/anger.png',
-      'JOY': 'assets/imagesnoBg/joy.png',
-      'DISGUST': 'assets/imagesnoBg/disgust.png',
-      'FEAR': 'assets/imagesnoBg/fear.png',
-      'SAD': 'assets/imagesnoBg/sad.png',
-      'EMBARASSMENT': 'assets/imagesnoBg/embarassment.png',
+      'ANGER': 'assets/images2/anger.png',
+      'JOY': 'assets/images2/joy.png',
+      'DISGUST': 'assets/images2/disgust.png',
+      'FEAR': 'assets/images2/fear.png',
+      'SAD': 'assets/images2/sad.png',
+      'EMBARASSMENT': 'assets/images2/embarassment.png',
     };
     return imagePath[name];
   }

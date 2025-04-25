@@ -51,6 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: Text(
+                      'HOW WAS YOUR DAY?',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      // textAlign: TextAlign.center,
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child:
@@ -87,7 +97,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         Mood? mood = state.moodsOfTheDay?.moodsList[index];
                         return GestureDetector(
                           onTap: () {
-                            context.goNamed('details', extra: mood);
+                            context.goNamed(
+                              'details',
+                              extra: {
+                                'mood': mood,
+                                'date': state.moodsOfTheDay!.date,
+                                'time': DateFormatter.getTime(mood.time),
+                              },
+                            );
                           },
                           child: MoodCard(
                             title: mood!.name,
