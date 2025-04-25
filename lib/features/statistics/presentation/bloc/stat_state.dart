@@ -3,7 +3,7 @@ part of 'stat_bloc.dart';
 @immutable
 sealed class StatState {
   final StatisticsModel statisticsModel;
-  final Map<String, String> moodCountInAMonth;
+  final Map<String, double> moodCountInAMonth;
   const StatState({
     required this.moodCountInAMonth,
     required this.statisticsModel,

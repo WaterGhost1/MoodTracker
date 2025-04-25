@@ -115,6 +115,33 @@ class AppRouter {
                               ),
                             ),
                           ),
+
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<BottomNavigationCubit>()
+                                    .updateTabIndex(3);
+                                context.goNamed('stat');
+                              },
+                              child: Container(
+                                color:
+                                    activeIndex == 3
+                                        ? AppPallete.joy
+                                        : Colors.transparent,
+                                height: 60,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.calculate,
+                                    color:
+                                        activeIndex == 3
+                                            ? Colors.white
+                                            : Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

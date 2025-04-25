@@ -8,7 +8,7 @@ import 'package:mood_tracker/core/utils/date_formats.dart';
 import 'package:mood_tracker/core/utils/picker.dart';
 import 'package:mood_tracker/core/widgets/mood_card.dart';
 import 'package:mood_tracker/features/home/presentation/bloc/home_bloc.dart';
-import 'package:mood_tracker/features/home/presentation/widgets/pie_chart.dart';
+import 'package:mood_tracker/core/widgets/pie_chart.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -55,7 +55,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child:
                         state.pieData.isNotEmpty
-                            ? PChart(pieData: state.pieData)
+                            ? PChart(
+                              pieData: state.pieData,
+                              isRing: true,
+                              hasCenter: true,
+                              legendRow: true,
+                              isLegendBottom: true,
+                              isChartValuesOutside: true,
+                            )
                             : Text("No moods for today"),
                   ),
                   Text(
@@ -71,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           title: state.currentMood!.name,
                           description: state.currentMood!.description,
                           date: state.moodsOfTheDay!.date,
+
                           time: DateFormatter.getTime(state.currentMood!.time),
                           moodColor: Picker.colorPicker(
                             name: state.currentMood!.name,
@@ -98,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: mood!.name,
                             description: mood.description,
                             date: state.moodsOfTheDay!.date,
+
                             time: DateFormatter.getTime(mood.time),
                             moodColor: Picker.colorPicker(
                               name: mood.name.toUpperCase(),

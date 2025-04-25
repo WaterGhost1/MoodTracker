@@ -12,4 +12,12 @@ class DateFormatter {
   static String getTime(DateTime dateTime) {
     return DateFormat('h:mm a').format(dateTime);
   }
+
+  static String getMonth(DateTime date) {
+    return DateFormat('MMMM').format(date);
+  }
+
+  static String getYear(DateTime date) {
+    return "${date.year}";
+  }
 }

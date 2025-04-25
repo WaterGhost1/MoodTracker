@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mood_tracker/core/models/statistics_model.dart';
+import 'package:mood_tracker/core/models/mood_per_day.dart';
+import 'package:mood_tracker/features/statistics/model/statistics_model.dart';
 import 'package:mood_tracker/core/repository/shared_repository.dart';
 import 'package:mood_tracker/core/utils/calculate.dart';
+import 'package:mood_tracker/core/utils/date_formats.dart';
 
 part 'stat_event.dart';
 part 'stat_state.dart';
@@ -35,9 +37,16 @@ class StatBloc extends Bloc<StatEvent, StatState> {
           ),
         ),
         (r) {
-          final Map<String, int> statData = Calculate.getAllMoodsCount(
+          final Map<String, double> statData = Calculate.getAllMoodsCount(
             moodsAll: r,
           );
+
+          final List<MoodsInADay> moodsInADayForTheMonth =
+              Calculate.getMoodStatsInAMonthAndYear(
+                moodsList: r,
+                month: DateFormatter.getMonth(event.currentDate),
+                year: DateFormatter.getYear(event.currentDate),
+              );
 
           final StatisticsModel stat = StatisticsModel(
             joyCount: statData['JOY'] ?? 0,
@@ -47,11 +56,15 @@ class StatBloc extends Bloc<StatEvent, StatState> {
             disgustCount: statData['DISGUST'] ?? 0,
             embarassedCount: statData['EMBARASSMENT'] ?? 0,
           );
-
+          print(
+            "month: ${DateFormatter.getMonth(event.currentDate)} result ${Calculate.getAllMoodsCount(moodsAll: moodsInADayForTheMonth)}",
+          );
           emit(
             StatSuccess(
               statisticsModel: stat,
-              moodCountInAMonth: Calculate.getMoodStatsInAMonth(moodsList: r),
+              moodCountInAMonth: Calculate.getAllMoodsCount(
+                moodsAll: moodsInADayForTheMonth,
+              ),
             ),
           );
         },

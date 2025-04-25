@@ -34,7 +34,13 @@ class _AddNewEntryState extends State<AddNewEntry> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: BlocConsumer<MoodBloc, MoodState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is MoodFailed) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        },
         builder: (context, state) {
           return Column(
             children: [

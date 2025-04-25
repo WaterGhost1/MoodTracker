@@ -99,6 +99,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                           title: mood.name,
                                           description: mood.description,
                                           date: moodDay.date,
+
                                           time: DateFormatter.getTime(
                                             mood.time,
                                           ),

@@ -16,7 +16,7 @@ class Calculate {
     return moodCounts;
   }
 
-  static String getHighestMood(Map<String, double> moods) {
+  static Map<String, double> getHighestMood(Map<String, double> moods) {
     late String highestStr;
     double highestVal = 1;
     moods.forEach((key, value) {
@@ -28,13 +28,13 @@ class Calculate {
         highestVal = highestVal;
       }
     });
-    return highestStr;
+    return {highestStr: highestVal};
   }
 
-  static Map<String, int> getAllMoodsCount({
+  static Map<String, double> getAllMoodsCount({
     required List<MoodsInADay> moodsAll,
   }) {
-    Map<String, int> moodCountAll = {};
+    Map<String, double> moodCountAll = {};
     for (MoodsInADay moods in moodsAll) {
       List<Mood> moodsListPerDar = moods.moodsList;
 
@@ -50,16 +50,17 @@ class Calculate {
     return moodCountAll;
   }
 
-  static Map<String, String> getMoodStatsInAMonth({
+  static List<MoodsInADay> getMoodStatsInAMonthAndYear({
     required List<MoodsInADay> moodsList,
+    required String month,
+    required String year,
   }) {
-    Map<String, String> moodCountMonth = {};
+    List<MoodsInADay> filteredMoodsInMonthAndYear =
+        moodsList.where((moodsInADay) {
+          return moodsInADay.date.contains(month) &&
+              moodsInADay.date.contains(year);
+        }).toList();
 
-    for (MoodsInADay moods in moodsList) {
-      Map<String, double> moodsCount = countMoodsByName(moods.moodsList);
-      moodCountMonth[moods.date] = getHighestMood(moodsCount);
-    }
-
-    return moodCountMonth;
+    return filteredMoodsInMonthAndYear;
   }
 }

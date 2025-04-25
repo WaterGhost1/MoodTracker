@@ -6,6 +6,11 @@ import 'package:mood_tracker/core/utils/picker.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class PChart extends StatelessWidget {
+  final bool hasCenter;
+  final bool legendRow;
+  final bool isChartValuesOutside;
+  final bool isLegendBottom;
+  final bool isRing;
   final Map<String, double> pieData;
   final Map<String, Color> colorMap = {
     "JOY": AppPallete.joy,
@@ -16,7 +21,15 @@ class PChart extends StatelessWidget {
     "EMBARASSMENT": AppPallete.embarass,
   };
 
-  PChart({super.key, required this.pieData});
+  PChart({
+    super.key,
+    required this.pieData,
+    required this.isRing,
+    required this.hasCenter,
+    required this.legendRow,
+    required this.isLegendBottom,
+    required this.isChartValuesOutside,
+  });
   final colorsList = [
     AppPallete.joy,
     AppPallete.fear,
@@ -28,7 +41,7 @@ class PChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String? lottiePath = Picker.lottiePicker(
-      name: Calculate.getHighestMood(pieData),
+      name: Calculate.getHighestMood(pieData).keys.first,
     );
     final List<Color> dynamicColors =
         pieData.keys.map((key) {
@@ -41,27 +54,31 @@ class PChart extends StatelessWidget {
       chartRadius: MediaQuery.of(context).size.width / 3,
       colorList: dynamicColors,
       initialAngleInDegree: 0,
-      chartType: ChartType.ring,
+      chartType: isRing ? ChartType.ring : ChartType.disc,
       chartLegendSpacing: 50,
       ringStrokeWidth: 32,
       legendOptions: LegendOptions(
-        showLegendsInRow: true,
-        legendPosition: LegendPosition.bottom,
+        showLegendsInRow: legendRow,
+        legendPosition:
+            isLegendBottom ? LegendPosition.bottom : LegendPosition.right,
         showLegends: true,
         legendShape: BoxShape.circle,
         legendTextStyle: TextStyle(fontWeight: FontWeight.bold),
       ),
-      centerWidget: SizedBox(
-        height: 90,
-        width: 100,
-        child: Lottie.asset(lottiePath!, width: 80, height: 80),
-      ),
+      centerWidget:
+          hasCenter
+              ? SizedBox(
+                height: 90,
+                width: 100,
+                child: Lottie.asset(lottiePath!, width: 80, height: 80),
+              )
+              : SizedBox.shrink(),
       chartValuesOptions: ChartValuesOptions(
         showChartValueBackground: true,
         showChartValues: true,
         showChartValuesInPercentage: true,
-        showChartValuesOutside: true,
-        decimalPlaces: 1,
+        showChartValuesOutside: isChartValuesOutside,
+        decimalPlaces: 0,
       ),
     );
   }
