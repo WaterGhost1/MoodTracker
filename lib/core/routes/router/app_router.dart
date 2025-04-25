@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mood_tracker/core/models/mood_model.dart';
 import 'package:mood_tracker/core/routes/cubit/route_cubit.dart';
+import 'package:mood_tracker/core/routes/param_models/detail_param.dart';
 import 'package:mood_tracker/core/theme/app_pallete.dart';
 import 'package:mood_tracker/features/history/presentation/screens/history_screen.dart';
 import 'package:mood_tracker/features/home/presentation/screens/home_page.dart';
@@ -175,8 +175,8 @@ class AppRouter {
               path: '/details',
               name: 'details',
               builder: (context, state) {
-                final mood = state.extra as Mood;
-                return DetailScreen(mood: mood);
+                final detailParam = state.extra as DetailParam;
+                return DetailScreen(detailParam: detailParam);
               },
             ),
           ],

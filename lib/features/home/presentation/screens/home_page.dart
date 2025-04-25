@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mood_tracker/core/models/mood_model.dart';
+import 'package:mood_tracker/core/routes/param_models/detail_param.dart';
 import 'package:mood_tracker/core/theme/app_pallete.dart';
 import 'package:mood_tracker/core/utils/date_formats.dart';
 import 'package:mood_tracker/core/utils/picker.dart';
@@ -72,7 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   state.currentMood != null
                       ? GestureDetector(
                         onTap: () {
-                          context.goNamed('details', extra: state.currentMood);
+                          DetailParam detailParam = DetailParam(
+                            date: state.moodsOfTheDay!.date,
+                            mood: state.currentMood,
+                          );
+                          context.goNamed('details', extra: detailParam);
                         },
                         child: MoodCard(
                           title: state.currentMood!.name,
@@ -100,7 +105,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         Mood? mood = state.moodsOfTheDay?.moodsList[index];
                         return GestureDetector(
                           onTap: () {
-                            context.goNamed('details', extra: mood);
+                            DetailParam detailParam = DetailParam(
+                              date: state.moodsOfTheDay!.date,
+                              mood: state.currentMood,
+                            );
+                            context.goNamed('details', extra: detailParam);
                           },
                           child: MoodCard(
                             title: mood!.name,

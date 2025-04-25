@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 // import 'package:go_router/go_router.dart';
 import 'package:mood_tracker/core/models/mood_model.dart';
+import 'package:mood_tracker/core/routes/param_models/detail_param.dart';
 // import 'package:mood_tracker/core/routes/router/app_router.dart';
 import 'package:mood_tracker/core/utils/date_formats.dart';
 import 'package:mood_tracker/core/utils/picker.dart';
 
 class DetailScreen extends StatelessWidget {
   // final String date;
-  final Mood mood;
-  const DetailScreen({super.key, required this.mood});
+  final DetailParam detailParam;
+  const DetailScreen({super.key, required this.detailParam});
 
   @override
   Widget build(BuildContext context) {
-    final String imgPath =
-        Picker.imgPicker(name: mood.name) ?? 'assets/images2/anger.png';
+    final String? imgPath = Picker.imgPicker(
+      name: detailParam.mood?.name ?? 'assets/images2/anger.png',
+    );
+    'assets/images2/anger.png';
     return Container(
       // color: Color(0xffEF476F),
       child: Column(
@@ -21,13 +24,13 @@ class DetailScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         children: [
           Text(
-            mood.name,
+            detailParam.mood!.name,
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
           Container(
             height: 230,
             width: double.infinity,
-            child: Image.asset(imgPath, fit: BoxFit.cover),
+            child: Image.asset(imgPath!, fit: BoxFit.cover),
           ),
 
           // Text("Mood: ${mood.name}"),
@@ -46,9 +49,12 @@ class DetailScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      //Text('$date  ', style: TextStyle(fontSize: 13)),
                       Text(
-                        DateFormatter.getTime(mood.time),
+                        '${detailParam.date}  ',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      Text(
+                        DateFormatter.getTime(detailParam.mood!.time),
                         style: TextStyle(fontSize: 13),
                       ),
                     ],
@@ -57,7 +63,7 @@ class DetailScreen extends StatelessWidget {
               ],
             ),
           ),
-          DetailCard(moodDetail: mood),
+          DetailCard(moodDetail: detailParam.mood!),
         ],
       ),
     );
