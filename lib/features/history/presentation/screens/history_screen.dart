@@ -33,80 +33,94 @@ class _HistoryScreenState extends State<HistoryScreen> {
         if (groupMoods.isEmpty) {
           return Center(child: Text("No History Available"));
         } else {
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: ListView.builder(
-              itemCount: keys.length,
-              itemBuilder: (context, index) {
-                final monthYearKey = keys[index];
-                final moodsForMonthYear = groupMoods[monthYearKey]!;
+          return CustomScrollView(
+            slivers: [
+              // SliverAppBar for the collapsible header
+              SliverAppBar(
+                expandedHeight: 200.0,
+                toolbarHeight: 20,
 
-                return Card(
-                  elevation: 5,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.white, width: 2),
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              monthYearKey,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
+                floating: false,
+                // pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Image.asset(
+                    'assets/images2/logowithtxt.png', // Add a background image if you want
+                    // fit: BoxFit.contain,
+                    width: 100,
+                  ),
+                ),
+              ),
+              SliverAppBar(
+                centerTitle: true,
+                pinned: true,
+                title: Text(
+                  'TIMELINE',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ),
+
+              // SliverList to display the list of cards
+              SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final monthYearKey = keys[index];
+                  final moodsForMonthYear = groupMoods[monthYearKey]!;
+
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            monthYearKey,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
                             ),
                           ),
-
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: moodsForMonthYear.length,
-                            itemBuilder: (context, index) {
-                              final moodDay = moodsForMonthYear[index];
-                              return Column(
-                                children:
-                                    moodDay.moodsList.map((mood) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          DetailParam detailParam = DetailParam(
-                                            date: moodDay.date,
-                                            mood: mood,
-                                          );
-                                          context.goNamed(
-                                            'details',
-                                            extra: detailParam,
-                                          );
-                                        },
-                                        child: MoodCard(
-                                          title: mood.name,
-                                          description: mood.description,
+                        ),
+                        // List of moods for the month
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: moodsForMonthYear.length,
+                          itemBuilder: (context, index) {
+                            final moodDay = moodsForMonthYear[index];
+                            return Column(
+                              children:
+                                  moodDay.moodsList.map((mood) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        DetailParam detailParam = DetailParam(
                                           date: moodDay.date,
-                                          time: DateFormatter.getTime(
-                                            mood.time,
-                                          ),
-                                          moodColor: Picker.colorPicker(
-                                            name: mood.name,
-                                          ),
+                                          mood: mood,
+                                        );
+                                        context.goNamed(
+                                          'details',
+                                          extra: detailParam,
+                                        );
+                                      },
+                                      child: MoodCard(
+                                        title: mood.name,
+                                        description: mood.description,
+                                        date: moodDay.date,
+                                        time: DateFormatter.getTime(mood.time),
+                                        moodColor: Picker.colorPicker(
+                                          name: mood.name,
                                         ),
-                                      );
-                                    }).toList(),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                                      ),
+                                    );
+                                  }).toList(),
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  ),
-                );
-              },
-            ),
+                  );
+                }, childCount: keys.length),
+              ),
+              // SliverFillRemaining(),
+            ],
           );
         }
       },
