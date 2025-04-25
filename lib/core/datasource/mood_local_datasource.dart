@@ -54,4 +54,13 @@ class MoodLocalDatasource {
 
     return newMood;
   }
+
+  Future<List> getMoodsListInAMonth({required String month}) async {
+    final List filteredMoods =
+        moodDayBox.values.where((mood) {
+          return mood.date == month;
+        }).toList();
+
+    return filteredMoods;
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mood_tracker/core/models/statistics_model.dart';
 import 'package:mood_tracker/features/statistics/presentation/bloc/stat_bloc.dart';
+import 'package:mood_tracker/features/statistics/presentation/widget/data_chart.dart';
 
 class StatScreen extends StatefulWidget {
   const StatScreen({super.key});
