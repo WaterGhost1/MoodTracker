@@ -154,22 +154,34 @@ class AppRouter {
             GoRoute(
               path: '/',
               name: 'home',
-              builder: (context, state) => const HomeScreen(),
+              builder: (context, state) {
+                context.read<BottomNavigationCubit>().updateTabIndex(0);
+                return HomeScreen();
+              },
             ),
             GoRoute(
               path: '/history',
               name: 'history',
-              builder: (context, state) => const HistoryScreen(),
+              builder: (context, state) {
+                context.read<BottomNavigationCubit>().updateTabIndex(2);
+                return HistoryScreen();
+              },
             ),
             GoRoute(
               path: '/entry',
               name: 'entry',
-              builder: (context, state) => const AddNewEntry(),
+              builder: (context, state) {
+                context.read<BottomNavigationCubit>().updateTabIndex(1);
+                return AddNewEntry();
+              },
             ),
             GoRoute(
               path: '/stat',
               name: 'stat',
-              builder: (context, state) => const StatScreen(),
+              builder: (context, state) {
+                context.read<BottomNavigationCubit>().updateTabIndex(3);
+                return StatScreen();
+              },
             ),
             GoRoute(
               path: '/details',

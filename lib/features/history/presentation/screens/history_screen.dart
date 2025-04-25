@@ -35,17 +35,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
         } else {
           return CustomScrollView(
             slivers: [
-              // SliverAppBar for the collapsible header
               SliverAppBar(
                 expandedHeight: 200.0,
                 toolbarHeight: 20,
 
                 floating: false,
-                // pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Image.asset(
-                    'assets/images2/logowithtxt.png', // Add a background image if you want
-                    // fit: BoxFit.contain,
+                    'assets/images2/logowithtxt.png',
+
                     width: 100,
                   ),
                 ),
@@ -59,7 +57,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 ),
               ),
 
-              // SliverList to display the list of cards
               SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   final monthYearKey = keys[index];
