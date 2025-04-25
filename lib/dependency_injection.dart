@@ -10,6 +10,7 @@ import 'package:mood_tracker/features/history/presentation/bloc/history_bloc.dar
 import 'package:mood_tracker/features/home/presentation/bloc/home_bloc.dart';
 import 'package:mood_tracker/features/mood_entry/presentation/bloc/mood_bloc.dart';
 import 'package:mood_tracker/features/mood_entry/repositories/mood_entry_repository.dart';
+import 'package:mood_tracker/features/statistics/presentation/bloc/stat_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -69,5 +70,10 @@ void _initMoodEntry() {
   // History Bloc
   sl.registerFactory<HistoryBloc>(
     () => HistoryBloc(sharedRepository: sl<SharedRepository>()),
+  );
+
+  // Stat Bloc
+  sl.registerFactory<StatBloc>(
+    () => StatBloc(sharedRepository: sl<SharedRepository>()),
   );
 }

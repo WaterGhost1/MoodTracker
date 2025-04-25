@@ -16,12 +16,12 @@ class _AddNewEntryState extends State<AddNewEntry> {
   final TextEditingController controller = TextEditingController();
 
   final Map<String, String> imagePath = {
-    'ANGER': 'assets/imagesnoBg/anger.png',
-    'JOY': 'assets/imagesnoBg/joy.png',
-    'DISGUST': 'assets/imagesnoBg/disgust.png',
-    'FEAR': 'assets/imagesnoBg/fear.png',
-    'SAD': 'assets/imagesnoBg/sad.png',
-    'EMBARASSMENT': 'assets/imagesnoBg/embarassment.png',
+    'ANGER': 'assets/images2/anger.png',
+    'JOY': 'assets/images2/joy.png',
+    'DISGUST': 'assets/images2/disgust.png',
+    'FEAR': 'assets/images2/fear.png',
+    'SAD': 'assets/images2/sad.png',
+    'EMBARASSMENT': 'assets/images2/embarassment.png',
   };
 
   @override
@@ -37,7 +37,6 @@ class _AddNewEntryState extends State<AddNewEntry> {
         listener: (context, state) {},
         builder: (context, state) {
           return Column(
-            mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 25),
@@ -46,7 +45,6 @@ class _AddNewEntryState extends State<AddNewEntry> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 70),
                 child: CarouselSlider(
@@ -56,19 +54,11 @@ class _AddNewEntryState extends State<AddNewEntry> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Container(
-                              height: 200,
+                              height: 230,
                               width: double.infinity,
                               child: Image.asset(
                                 entry.value,
                                 fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              entry.key,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -76,26 +66,21 @@ class _AddNewEntryState extends State<AddNewEntry> {
                       }).toList(),
                   options: CarouselOptions(
                     onPageChanged: (index, reason) {
-                      print(imagePath.keys.elementAt(index));
                       context.read<MoodBloc>().add(
                         PageChanged(
                           moodName: imagePath.keys.elementAt(index).toString(),
                         ),
                       );
-
-                      print(state);
                     },
                     enlargeCenterPage: false,
                     viewportFraction: 1,
                   ),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 25),
                 child: DescriptionTF(descriptioncontroller: controller),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 45),
                 child: ElevatedButton(
@@ -109,9 +94,9 @@ class _AddNewEntryState extends State<AddNewEntry> {
                           description: controller.text,
                         ),
                       );
-                    }
 
-                    context.goNamed('home');
+                      context.goNamed('home');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -123,11 +108,7 @@ class _AddNewEntryState extends State<AddNewEntry> {
                   ),
                   child: Text(
                     'ADD',
-                    style: TextStyle(
-                      fontSize: 19,
-                      color: Colors.black,
-                      // fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 19, color: Colors.black),
                   ),
                 ),
               ),

@@ -33,4 +33,18 @@ class Picker {
     };
     return imagePath[name];
   }
+
+  static String? lottiePicker({required String name}) {
+    print("Pick name $name");
+    final Map<String, String> imagePath = {
+      'ANGER': 'assets/lottie/anger.png',
+      'JOY': 'assets/lottie/happy.json',
+      'DISGUST': 'assets/lottie/disgusted.json',
+      'FEAR': 'assets/lottie/fear.json',
+      'SAD': 'assets/lottie/sad.json',
+      'EMBARASSMENT': 'assets/lottie/embarassed.json',
+    };
+    print("image path ${imagePath[name]}");
+    return imagePath[name] ?? 'assets/lottie/nodata.json';
+  }
 }

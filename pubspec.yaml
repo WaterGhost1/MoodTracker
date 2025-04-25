@@ -36,7 +36,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/lottie/nodata.json
+    - assets/lottie/
     - assets/images2/
-    - assets/imagesnoBg/
 

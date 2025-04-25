@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mood_tracker/core/theme/app_pallete.dart';
+import 'package:mood_tracker/core/utils/calculate.dart';
+import 'package:mood_tracker/core/utils/picker.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class PChart extends StatelessWidget {
@@ -10,6 +13,7 @@ class PChart extends StatelessWidget {
     "DISGUST": AppPallete.disgust,
     "ANGER": AppPallete.anger,
     "SAD": AppPallete.sad,
+    "EMBARASSMENT": AppPallete.embarass,
   };
 
   PChart({super.key, required this.pieData});
@@ -20,8 +24,12 @@ class PChart extends StatelessWidget {
     AppPallete.disgust,
     AppPallete.joy,
   ];
+
   @override
   Widget build(BuildContext context) {
+    final String? lottiePath = Picker.lottiePicker(
+      name: Calculate.getHighestMood(pieData),
+    );
     final List<Color> dynamicColors =
         pieData.keys.map((key) {
           return colorMap[key] ?? Colors.grey;
@@ -30,7 +38,7 @@ class PChart extends StatelessWidget {
     return PieChart(
       dataMap: pieData,
       animationDuration: Duration(milliseconds: 800),
-      chartRadius: MediaQuery.of(context).size.width / 3.2,
+      chartRadius: MediaQuery.of(context).size.width / 3,
       colorList: dynamicColors,
       initialAngleInDegree: 0,
       chartType: ChartType.ring,
@@ -43,11 +51,16 @@ class PChart extends StatelessWidget {
         legendShape: BoxShape.circle,
         legendTextStyle: TextStyle(fontWeight: FontWeight.bold),
       ),
+      centerWidget: SizedBox(
+        height: 90,
+        width: 100,
+        child: Lottie.asset(lottiePath!, width: 80, height: 80),
+      ),
       chartValuesOptions: ChartValuesOptions(
         showChartValueBackground: true,
         showChartValues: true,
         showChartValuesInPercentage: true,
-        showChartValuesOutside: false,
+        showChartValuesOutside: true,
         decimalPlaces: 1,
       ),
     );

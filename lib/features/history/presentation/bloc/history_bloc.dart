@@ -17,7 +17,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       response.fold(
         (l) => emit(HistoryFailed(listOfMoods: state.listOfMoods)),
         (r) {
-          final sortedListOfMoods = Sort.groupByMonthYear(r);
+          final sortedListOfMoods = Sort.groupByDay(r);
           emit(HistorySuccess(listOfMoods: sortedListOfMoods));
         },
       );

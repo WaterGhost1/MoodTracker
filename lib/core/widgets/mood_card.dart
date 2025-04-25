@@ -95,7 +95,10 @@ class MoodCard extends StatelessWidget {
                           child: Text(
                             description!,
                             textAlign: TextAlign.start,
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(
+                              fontSize: 12,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                       ],

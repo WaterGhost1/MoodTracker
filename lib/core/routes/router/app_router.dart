@@ -8,6 +8,7 @@ import 'package:mood_tracker/features/history/presentation/screens/history_scree
 import 'package:mood_tracker/features/home/presentation/screens/home_page.dart';
 import 'package:mood_tracker/features/mood_details/presentation/screens/detail_screen.dart';
 import 'package:mood_tracker/features/mood_entry/presentation/screens/mood_entry_screen.dart';
+import 'package:mood_tracker/features/statistics/presentation/screens/stat_screen.dart';
 
 class AppRouter {
   late final GoRouter router;
@@ -104,7 +105,7 @@ class AppRouter {
                                 height: 60,
                                 child: Center(
                                   child: Icon(
-                                    Icons.search,
+                                    Icons.history,
                                     color:
                                         activeIndex == 2
                                             ? Colors.white
@@ -137,6 +138,11 @@ class AppRouter {
               path: '/entry',
               name: 'entry',
               builder: (context, state) => const AddNewEntry(),
+            ),
+            GoRoute(
+              path: '/stat',
+              name: 'stat',
+              builder: (context, state) => const StatScreen(),
             ),
             GoRoute(
               path: '/details',
