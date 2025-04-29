@@ -65,11 +65,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
             slivers.add(
               SliverPersistentHeader(
-                // floating: true,
+                floating: false,
                 pinned: true,
                 delegate: _CustomHeaderDelegate(
                   maxHeight: 50,
-                  minHeight: 1,
+                  minHeight: 50,
                   child: Text(monthYearKey),
                 ),
               ),
@@ -128,7 +128,12 @@ class _CustomHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(color: Colors.blue, child: Center(child: child));
+    return Container(
+      color: Colors.white,
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: child,
+    );
   }
 
   @override
@@ -139,5 +144,5 @@ class _CustomHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
+      false;
 }
