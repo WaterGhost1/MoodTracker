@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mood_tracker/core/models/mood_model.dart';
+import 'package:mood_tracker/core/models/mood_per_day.dart';
 
 import 'package:mood_tracker/core/routes/param_models/detail_param.dart';
 import 'package:mood_tracker/core/utils/date_formats.dart';
@@ -79,8 +81,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 delegate: SliverChildBuilderDelegate((context, index) {
                   if (index >= flattenMood.length) return SizedBox.shrink();
                   final moodEntry = flattenMood[index];
-                  final mood = moodEntry['mood'];
-                  final date = moodEntry['date'];
+                  final Mood mood = moodEntry['mood'] as Mood;
+                  final String date = moodEntry['date'] as String;
 
                   return GestureDetector(
                     onTap: () {
@@ -100,6 +102,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   );
                 }, childCount: flattenMood.length),
               ),
+
               // SliverFillRemaining(),
             ],
           );
