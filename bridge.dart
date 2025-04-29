@@ -29,12 +29,20 @@ class _HistoryScreenState extends State<HistoryScreen> {
       builder: (context, state) {
         final groupMoods = state.listOfMoods;
         final keys = state.listOfMoods.keys.toList();
-        final monthYearKey = keys[0];
-        final moodsForMonthYear = groupMoods[monthYearKey]!;
 
         if (groupMoods.isEmpty) {
           return Center(child: Text("No History Available"));
         } else {
+          final monthYearKey = keys[0];
+          final moodsForMonthYear = groupMoods[monthYearKey]!;
+
+          final flattenMood =
+              moodsForMonthYear.expand((moodDay) {
+                return moodDay.moodsList.map(
+                  (mood) => {'date': moodDay.date, 'mood': mood},
+                );
+              }).toList();
+
           return CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -67,32 +75,30 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: Text(monthYearKey),
                 ),
               ),
-              SliverFixedExtentList(
-                itemExtent: 100,
+              SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
-                  final moodDay = moodsForMonthYear[index];
-                  return Column(
-                    children:
-                        moodDay.moodsList.map((mood) {
-                          return GestureDetector(
-                            onTap: () {
-                              DetailParam detailParam = DetailParam(
-                                date: moodDay.date,
-                                mood: mood,
-                              );
-                              context.goNamed('details', extra: detailParam);
-                            },
-                            child: MoodCard(
-                              title: mood.name,
-                              description: mood.description,
-                              date: moodDay.date,
-                              time: DateFormatter.getTime(mood.time),
-                              moodColor: Picker.colorPicker(name: mood.name),
-                            ),
-                          );
-                        }).toList(),
+                  if (index >= flattenMood.length) return SizedBox.shrink();
+                  final moodEntry = flattenMood[index];
+                  final mood = moodEntry['mood'];
+                  final date = moodEntry['date'];
+
+                  return GestureDetector(
+                    onTap: () {
+                      DetailParam detailParam = DetailParam(
+                        date: date.toString(),
+                        mood: mood,
+                      );
+                      context.goNamed('details', extra: detailParam);
+                    },
+                    child: MoodCard(
+                      title: mood.name,
+                      description: mood.description,
+                      date: date.toString(),
+                      time: DateFormatter.getTime(mood.time),
+                      moodColor: Picker.colorPicker(name: mood.name),
+                    ),
                   );
-                }),
+                }, childCount: flattenMood.length),
               ),
               // SliverFillRemaining(),
             ],
