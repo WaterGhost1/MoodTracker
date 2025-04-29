@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mood_tracker/core/models/mood_model.dart';
-import 'package:mood_tracker/core/models/mood_per_day.dart';
-
 import 'package:mood_tracker/core/routes/param_models/detail_param.dart';
 import 'package:mood_tracker/core/utils/date_formats.dart';
 import 'package:mood_tracker/core/utils/picker.dart';
@@ -35,41 +33,39 @@ class _HistoryScreenState extends State<HistoryScreen> {
         if (groupMoods.isEmpty) {
           return Center(child: Text("No History Available"));
         } else {
-          final monthYearKey = keys[0];
-          final moodsForMonthYear = groupMoods[monthYearKey]!;
-
-          final flattenMood =
-              moodsForMonthYear.expand((moodDay) {
-                return moodDay.moodsList.map(
-                  (mood) => {'date': moodDay.date, 'mood': mood},
-                );
-              }).toList();
-
-          return CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                expandedHeight: 200.0,
-                toolbarHeight: 20,
-
-                floating: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset(
-                    'assets/images2/logowithtxt.png',
-
-                    width: 100,
-                  ),
+          final List<Widget> slivers = [
+            SliverAppBar(
+              expandedHeight: 200.0,
+              toolbarHeight: 20,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.asset(
+                  'assets/images2/logowithtxt.png',
+                  width: 100,
                 ),
               ),
-              SliverAppBar(
-                centerTitle: true,
-                pinned: true,
-                title: Text(
-                  'TIMELINE',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
+            ),
+            SliverAppBar(
+              centerTitle: true,
+              pinned: true,
+              title: Text(
+                'TIMELINE',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
+            ),
+          ];
+          for (final monthYearKey in keys) {
+            final moodForMonthYear = groupMoods[monthYearKey]!;
 
+            final flattenMood =
+                moodForMonthYear.expand((moodDay) {
+                  return moodDay.moodsList.map(
+                    (mood) => {'date': moodDay.date, 'mood': mood},
+                  );
+                }).toList();
+
+            slivers.add(
               SliverPersistentHeader(
+                // floating: true,
                 pinned: true,
                 delegate: _CustomHeaderDelegate(
                   maxHeight: 50,
@@ -77,6 +73,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: Text(monthYearKey),
                 ),
               ),
+            );
+
+            slivers.add(
               SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   if (index >= flattenMood.length) return SizedBox.shrink();
@@ -102,10 +101,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   );
                 }, childCount: flattenMood.length),
               ),
+            );
+          }
 
-              // SliverFillRemaining(),
-            ],
-          );
+          return CustomScrollView(slivers: slivers);
         }
       },
     );
@@ -140,5 +139,5 @@ class _CustomHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      false;
+      true;
 }
